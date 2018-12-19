@@ -10,3 +10,6 @@ gitc
 
 .idea/
 .env
+
+config/dbs.php
+config/wx_officialAccount.php
