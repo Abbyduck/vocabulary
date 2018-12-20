@@ -142,7 +142,7 @@ class WordsPool extends NotORM
         $sql = 'SELECT pool.id,w.content,w.pronunciation,w.audio,w.cndf,w.endf,w.example,pool.forget ,pool.review '
             . 'FROM words_pool AS pool LEFT JOIN words AS w '
             . 'ON pool.word_id = w.id '
-            . 'WHERE pool.openid = :openid and pool.status = 1 and (pool.dict = :dict or pool.dict = 0)  and pool.pass = 0 and (review_date <=:today or update_date=:today)'
+            . 'WHERE pool.openid = :openid and pool.status = 1 and (pool.dict = :dict or pool.dict = 0)  and pool.pass = 0 and (review_date <=:today or update_date=:today) '
             . 'ORDER BY pool.forget desc, pool.sequence desc, pool.id asc ';
         if($chat!='chat'){
             $sql .= 'LIMIT '.$limit.' ,'.$perpage;
