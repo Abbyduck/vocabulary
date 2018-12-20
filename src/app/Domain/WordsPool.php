@@ -62,7 +62,7 @@ class WordsPool {
         if($view=='chat'){
             $chat='';
             foreach($words as $v){
-                $chat.=$v['content']."\n ";
+                $chat.=$v['content']."\n";
             }
             return $chat;
         }else{

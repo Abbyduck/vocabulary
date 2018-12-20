@@ -126,7 +126,7 @@ class WordsPool extends Api {
         $wordsPool= new DomainWordsPool();
         $words= $wordsPool->getReviewWords($this->openid,$this->page,$this->view);
         if($this->view=='chat'){
-            return $words;
+            echo $words;exit();
         }
     }
 } 
