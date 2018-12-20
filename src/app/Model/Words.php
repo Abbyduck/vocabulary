@@ -21,7 +21,7 @@ PRIMARY KEY (`id`)
 
 class Words extends NotORM {
     public function getBookInertWords($openid,$book){
-        $words=$this->getORM()->select("id as word_id , '.$openid.' as openid ,dict")->where('dict',$book)->fetchAll();
+        $words=$this->getORM()->select("id as word_id , '$openid' as openid ,dict")->where('dict',$book)->fetchAll();
         return $words;
 
     }
