@@ -23,7 +23,7 @@
 <div class="container">
 <form action="?s=WordsPool.checkin" method="post">
     <div class="row">
-        <div class="col-xs-9"></div>
+        <div class="col-xs-10"></div>
         <div class="col-xs-1">pass </div>
         <div class="col-xs-1">mark </div>
     </div>

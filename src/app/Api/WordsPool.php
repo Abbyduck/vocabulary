@@ -65,6 +65,8 @@ class WordsPool extends Api {
      *  @desc Return new words view
      */
     public function getNewWords(){
+        \PhalApi\DI()->cookie=new Cookie();
+         \PhalApi\DI()->cookie->set('open_name', $this->openid, $_SERVER['REQUEST_TIME'] + 60*30);
         $word = new DomainWordsPool();
         $word->getWordsByDate($this->openid);
     }
@@ -119,6 +121,8 @@ class WordsPool extends Api {
             $wordsPool= new DomainWordsPool();
             $wordsPool->review($this->openid, $data);
         }
+        \PhalApi\DI()->cookie=new Cookie();
+        \PhalApi\DI()->cookie->set('open_name', $this->openid, $_SERVER['REQUEST_TIME'] + 60*30);
         $wordsPool= new DomainWordsPool();
         $words= $wordsPool->getReviewWords($this->openid,$this->page,$this->view);
         if($this->view=='chat'){
