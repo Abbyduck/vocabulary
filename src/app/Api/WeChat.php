@@ -32,8 +32,8 @@ class WeChat extends Api {
         $this->app->server->push(function ($message) {
             $user_openid = $message['FromUserName'];
             $user_info['openid'] = $user_openid;
-            \PhalApi\DI()->cookie=new Cookie();
-            \PhalApi\DI()->cookie->set('open_name', $user_openid, $_SERVER['REQUEST_TIME'] + 60*30);
+//            \PhalApi\DI()->cookie=new Cookie();
+//            \PhalApi\DI()->cookie->set('open_name', $user_openid, $_SERVER['REQUEST_TIME'] + 60*30);
 //            $userService = $this->app->user;
 //            $user = $userService->get($user_info['openid']);
 //            $user_info['nickname'] = $user['nickname'];

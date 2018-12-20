@@ -51,4 +51,17 @@ class Site extends Api {
             throw new BadRequestException('Login Expired',1);
         }
     }
+    public function selectWordBook(){
+        $wordsPool=new WordsPool();
+        $start=$wordsPool->selectWordBook('11',1);
+        if($start){
+            return 'Total '.$start.' words added!';
+        }else{
+            return 'Sorry! Something Wrong Happened.';
+        }
+    }
+    public function getReviewWords(){
+        $words=new WordsPool();
+        $words->getReviewWords('11',null,'chat');
+    }
 }
