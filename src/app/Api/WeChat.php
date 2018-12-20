@@ -159,16 +159,16 @@ class WeChat extends Api {
                         ],
                     ]
                 ],
-            [
-                "type" => "click",
-                "name" => "New Words",
-                "key"  => "V003"
-            ],
-            [
-                "type" => "click",
-                "name" => "Review",
-                "key"  => "V004"
-            ],
+                [
+                    "type" => "click",
+                    "name" => "New Words",
+                    "key"  => "V003"
+                ],
+                [
+                    "type" => "click",
+                    "name" => "Review",
+                    "key"  => "V004"
+                ],
              ];
         return $this->app->menu->create($menus);
     }

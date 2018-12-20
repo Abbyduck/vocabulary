@@ -57,14 +57,13 @@ class WordsPool extends NotORM
     public function getNewWords($openid, $date){
         $schedule = new Schedule();
         $dict = $schedule->getDict($openid);
-
         $today = date('Y-m-d');
         $time = date('H:i');
         //TODO reset function : no study records for 3 days -> reset
         $words=array();
-        if ($date == $today){
+        if (!$date){
             $history = new History();
-            $history = $history->history($openid,$dict,$date);
+            $history = $history->history($openid,$dict,$today);
             //no history today by now || already learnt at morning , but none at afternoon
             if(!$history || ($history==1 && $time >= '13:05')){
                 //select 10 new words

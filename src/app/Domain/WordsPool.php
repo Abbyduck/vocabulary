@@ -35,7 +35,6 @@ class WordsPool {
     }
 
     public function getWordsByDate($openid,$date=''){
-        $date = $date ? $date:date('y-m-d');
         $view = new Common();
         $wordsPool = new ModelWordsPool();
         $words = $wordsPool->getNewWords($openid,$date);
