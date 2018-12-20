@@ -98,7 +98,7 @@ class WordsPool extends NotORM
                 $this->TransactionBegin();
                 if(isset($data['pass'])){
                     $ids=$data['pass'];
-                    $this->getORM()->where('id',$ids)->update(array('pass'=>1,'update_date'=>$today));
+                    $this->getORM()->where('id',$ids)->update(array('pass'=>1,'update_date'=>$today,'review_date'=>$today));
                 }
                 if(isset($data['mark'])){
                     $ids=$data['mark'];

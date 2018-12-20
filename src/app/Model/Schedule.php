@@ -19,7 +19,7 @@ CREATE TABLE `schedule` (
 class Schedule extends NotORM {
 
     public function checkSchedule($openid,$book) {
-        $oldSchedule=$this->getORM()->where('openid = ? and learning_dict =?',$openid,$book)->fetchOne();
+        $oldSchedule=$this->getORM()->where('openid = :openid and learning_dict =:dict',array(':openid'=>$openid,':dict'=>$book))->fetchOne();
         if($oldSchedule){
             return false;
         }else{
