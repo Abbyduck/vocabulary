@@ -62,6 +62,14 @@ class WeChat extends Api {
                                     return 'Coming soon!';
                                     break;
 
+                                case 'V003'://temp new words
+                                    return 'http://vocabulary.duckduck.online/?s=WordsPool.getNewWords&openid='.$user_openid;
+                                    break;
+
+                                case 'V004'://temp view words
+                                    return 'http://vocabulary.duckduck.online/?s=WordsPool.getReviewWords&openid='.$user_openid;
+                                    break;
+
                                 default:
                                     return '其他点击事件!';
                                     break;
@@ -111,7 +119,7 @@ class WeChat extends Api {
     }
 
     /**
-     * 授权成功跳转地址,获得用户信息
+     * 授权成功跳转地址,获得用户信息(需认证之后才能获得)
      * @return mixed
      */
     public function oauth_callback()
@@ -151,16 +159,16 @@ class WeChat extends Api {
                         ],
                     ]
                 ],
-                [
-                    "type" => "view",
-                    "name" => "New Words",
-                    "url"  => "http://vocabulary.duckduck.online/?s=WordsPool.getNewWords"
-                ],
-                [
-                    "type" => "view",
-                    "name" => "Review",
-                    "url"  => "http://vocabulary.duckduck.online/?s=WordsPool.getReviewWords"
-                ],
+            [
+                "type" => "click",
+                "name" => "New Words",
+                "key"  => "V003"
+            ],
+            [
+                "type" => "click",
+                "name" => "Review",
+                "key"  => "V004"
+            ],
              ];
         return $this->app->menu->create($menus);
     }

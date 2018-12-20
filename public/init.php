@@ -25,4 +25,4 @@ if (\PhalApi\DI()->debug) {
 }
 
 // 翻译语言包设定
-\PhalApi\SL('zh_cn');
+\PhalApi\SL('en');
