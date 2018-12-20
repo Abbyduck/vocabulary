@@ -16,13 +16,19 @@
 <?php if(@$location) { ?>
     <center><span id="redirect">Redirect to Review page after <span id="second"></span> seconds.</span></center>
     <script>
+        var ua=window
         var seceond = 3;
         function showTime() {
             document.getElementById('second').innerHTML =seceond;
             seceond -= 1;
             if (seceond < 0) {
                 document.getElementById('container').innerHTML ='<center>Jump</center>';
-                location.href = '?s=WordsPool.getReviewWords&openid='+<?php echo @$openid; ?>;
+                if(navigator.userAgent.toLowerCase().indexOf("micromessenger"))
+                {
+                    window.location.href="?s=WordsPool.getReviewWords&openid=<?php echo @$openid; ?>&id="+10000*Math.random();
+                }else{
+                    location.href ="?s=WordsPool.getReviewWords&openid=<?php echo @$openid; ?>";
+                }
                 clearInterval( setTimeout(function() { showTime() },1000));
             }else{
                 setTimeout(function() { showTime() },1000);
