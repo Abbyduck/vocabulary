@@ -36,7 +36,7 @@ class Schedule extends NotORM {
     }
 
     public function getDict($openid){
-        $schedule=$this->getORM()->select('learning_dict')->where('openid = ?',$openid)->fetchOne();
+        $schedule=$this->getORM()->select('learning_dict')->where('openid = :openid',array(':openid'=>$openid))->fetchOne();
         if($schedule){
             return $schedule['learning_dict'];
         }else{
