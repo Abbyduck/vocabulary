@@ -2,6 +2,7 @@
 namespace App\Domain;
 
 use App\Common\Common;
+use App\Model\History;
 use App\Model\WordsPool as ModelWordsPool;
 use App\Model\Schedule as ModelSchedule;
 use PhalApi\Exception;
@@ -36,12 +37,16 @@ class WordsPool {
 
     public function getWordsByDate($openid,$date=''){
         $view = new Common();
+        $schedule = new ModelSchedule();
+        $dict = $schedule->getDict($openid);
         $wordsPool = new ModelWordsPool();
-        $words = $wordsPool->getNewWords($openid,$date);
+        $words = $wordsPool->getNewWords($openid,$date,$dict);
+        $history=new History();
+        $day=$history->total($openid,$dict);
         if($words){
-            $view->render('view/words.php', array('words' => $words, 'days' => 1));
+            $view->render('view/words.php', array('words' => $words, 'days' => $day));
         }else{
-            $view->render('view/response.php', array('msg' => 'Oops..No new words today , please check your schedule.'));
+            $view->render('view/response.php', array('msg' => 'Oops..No new words today , please check your schedule.','location'=>1,'openid'=>$openid));
         }
     }
 
@@ -50,7 +55,7 @@ class WordsPool {
         $view = new Common();
 
         if($wordsPool->checkin($openid,$data)){
-            $view->render('view/response.php', array('msg' => 'Finished!'));
+            $view->render('view/response.php', array('msg' => 'Finished!','location'=>1,'openid'=>$openid));
         }else{
             $view->render('view/response.php', array('msg' => 'Oops..Something wrong! Try again later.'));
         }
@@ -68,7 +73,11 @@ class WordsPool {
         }else{
             $view = new Common();
             if($words){
-                $view->render('view/review.php', array('words' => $words, 'days' => 1,'page'=>$page+1));
+                $schedule = new ModelSchedule();
+                $dict = $schedule->getDict($openid);
+                $history=new History();
+                $day=$history->total($openid,$dict);
+                $view->render('view/review.php', array('words' => $words, 'days' => $day, 'page'=>$page+1));
             }else{
                 $words=$wordsPool->totalReview($openid);
                 $view->render('view/response.php', array('msg' =>'You have reviewed '.$words.' words today!'));

@@ -4,9 +4,10 @@
 
 
 </header>
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>hahah</title>
+<title>Vocabulary</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <script  src="js/jquery.min.js"></script>
 
@@ -19,7 +20,7 @@
 
 </style>
 <body>
-<h4>Hello！The <strong> <?php echo @$days; ?></strong> day !!</h4>
+<center>Hello！The <strong> <?php echo @$days; ?></strong> day !!</center>
 <div class="container">
 <form action="?s=WordsPool.checkin" method="post">
     <div class="row">

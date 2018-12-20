@@ -18,12 +18,6 @@ CREATE TABLE `history` (
 
 class History extends NotORM
 {
-    /** Get learning history by openid , dictionary id , date
-     * @param $openid
-     * @param $book
-     * @param $date
-     * @return mixed
-     */
     public function history($openid, $book,$date)
     {
         $rows = $this->getORM()
@@ -32,6 +26,13 @@ class History extends NotORM
             ->order('id desc')
             ->limit(1)
             ->fetchOne();
+        return $rows;
+    }
+    public function total($openid, $book)
+    {
+        $rows = $this->getORM()
+            ->where('openid = :openid and dict = :dict ', array(':openid'=>$openid ,':dict'=>$book ))
+            ->count('id');
         return $rows;
     }
 

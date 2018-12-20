@@ -3,13 +3,14 @@
 <header>
 
 </header>
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Review</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
-<script  src="js/jquery.min.js"></script>
+<script src="js/jquery.min.js"></script>
 
-<script  src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
 <style>
     .row{ border-bottom: thin dotted; margin-bottom: 10px}
@@ -18,7 +19,8 @@
 
 </style>
 <body>
-<h4>Hello！The <strong> <?php echo @$days; ?></strong> day !!</h4>
+<center>Hey! <strong> <?php echo @$days; ?></strong> days !!</center>
+<br>
 <div class="container">
 <form action="?s=WordsPool.getReviewWords&page= <?php echo @$page; ?>" method="post">
     <div class="row">

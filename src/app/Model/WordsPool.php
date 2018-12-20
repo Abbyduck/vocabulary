@@ -54,9 +54,7 @@ class WordsPool extends NotORM
      * @param $date
      * @return mixed
      */
-    public function getNewWords($openid, $date){
-        $schedule = new Schedule();
-        $dict = $schedule->getDict($openid);
+    public function getNewWords($openid, $date,$dict){
         $today = date('Y-m-d');
         $time = date('H:i');
         //TODO reset function : no study records for 3 days -> reset

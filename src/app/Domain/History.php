@@ -11,4 +11,10 @@ class History{
         $history=$history->history($openid, $book,$date);
         return !empty($history)?$history['a']:'';
     }
+    public function total($openid, $book)
+    {
+        $history=new ModelHistory();
+        $history=$history->total($openid,$book);
+        return $history;
+    }
 }
