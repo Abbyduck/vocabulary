@@ -113,6 +113,9 @@ class WordsPool extends Api {
                     case substr($k,0,4)=='mark':
                         $data["mark"][]=substr($k,5);
                         break;
+                    case substr($k,0,4)=='pass':
+                        $data["mark"][]=substr($k,5);
+                        break;
                     default:
                         continue;
                         break;

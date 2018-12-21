@@ -95,7 +95,8 @@ class WordsPool extends NotORM
                 $this->TransactionBegin();
                 if(isset($data['pass'])){
                     $ids=$data['pass'];
-                    $this->getORM()->where('id',$ids)->update(array('pass'=>1,'update_date'=>$today,'review_date'=>$today));
+                    $review_date=date("Y-m-d",strtotime("+1 month",strtotime($today)));
+                    $this->getORM()->where('id',$ids)->update(array('pass'=>1,'update_date'=>$today,'review_date'=>$review_date));
                 }
                 if(isset($data['mark'])){
                     $ids=$data['mark'];
@@ -137,10 +138,10 @@ class WordsPool extends NotORM
         $today = date('Y-m-d');
         $limit=($page-1)*$perpage;
 
-        $sql = 'SELECT pool.id,w.content,w.pronunciation,w.audio,w.cndf,w.endf,w.example,pool.forget ,pool.review '
+        $sql = 'SELECT pool.id,w.content,w.pronunciation,w.audio,w.cndf,w.endf,w.example,pool.forget ,pool.review,pool.pass,pool.mark  '
             . 'FROM words_pool AS pool LEFT JOIN words AS w '
             . 'ON pool.word_id = w.id '
-            . 'WHERE pool.openid = :openid and pool.status = 1 and (pool.dict = :dict or pool.dict = 0)  and pool.pass = 0 and (review_date <=:today or update_date=:today) '
+            . 'WHERE pool.openid = :openid and pool.status = 1 and (pool.dict = :dict or pool.dict = 0) and (review_date <=:today or update_date=:today) '
             . 'ORDER BY pool.forget desc, pool.sequence desc, pool.id asc ';
         if($chat!='chat'){
             $sql .= 'LIMIT '.$limit.' ,'.$perpage;
@@ -163,6 +164,11 @@ class WordsPool extends NotORM
             if(isset($data['mark'])){
                 $ids=$data['mark'];
                 $this->getORM()->where('id',$ids)->where('review_date<=:today and openid=:openid ',array(':today'=>$today,':openid'=>$openid))->update(array('mark'=>1,'update_date'=>$today));
+            }
+            if(isset($data['pass'])){
+                $ids=$data['pass'];
+                $review_date=date("Y-m-d",strtotime("+1 month",strtotime($today)));
+                $this->getORM()->where('id',$ids)->where('review_date<=:today and openid=:openid ',array(':today'=>$today,':openid'=>$openid))->update(array('mark'=>1,'update_date'=>$today,'review_date'=>$review_date));
             }
             $update_sql='UPDATE words_pool set update_date=:today ,review_date= '
                 .' CASE WHEN ( review = 0 or review = 1 or review = 2 ) THEN date_add(:today,interval review+1 day) '
