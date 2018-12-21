@@ -77,7 +77,7 @@ class WordsPool {
                 $dict = $schedule->getDict($openid);
                 $history=new History();
                 $day=$history->total($openid,$dict);
-                $view->render('view/review.php', array('words' => $words, 'days' => $day, 'page'=>$page+1));
+                $view->render('view/review.php', array('words' => $words, 'days' => $day, 'page'=>$page+1, 'openid'=>$openid));
             }else{
                 $words=$wordsPool->totalReview($openid);
                 $view->render('view/response.php', array('msg' =>'You have reviewed '.$words.' words today!'));

@@ -22,7 +22,7 @@
 <center>Hey! <strong> <?php echo @$days; ?></strong> days !!</center>
 <br>
 <div class="container">
-<form action="?s=WordsPool.getReviewWords&page= <?php echo @$page; ?>" method="post">
+<form action="?s=WordsPool.getReviewWords&page= <?php echo @$page; ?>&openid=<?php echo @$page; ?>" method="post">
     <div class="row">
         <div class="col-xs-5"></div>
         <div class="col-xs-1">forget </div>
