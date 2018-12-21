@@ -22,10 +22,12 @@
 <center>Hey! <strong> <?php echo @$days; ?></strong> days !!</center>
 <br>
 <div class="container">
-<form action="?s=WordsPool.getReviewWords&page= <?php echo @$page; ?>&openid=<?php echo @$page; ?>" method="post">
+<form action="?s=WordsPool.getReviewWords&page= <?php echo @$page; ?>&openid=<?php echo @$openid; ?>" method="post">
     <div class="row">
         <div class="col-xs-5"></div>
         <div class="col-xs-1">forget </div>
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-1">pass </div>
         <div class="col-xs-1"> </div>
         <div class="col-xs-1">mark </div>
     </div>
@@ -39,6 +41,8 @@
         </div>
         <input name="id_<?php echo $word['id'] ?>" value="<?php echo $word['id'] ?>" hidden>
         <div class="col-xs-1"><input type="checkbox"  name="forget_<?php echo $word['id'] ?>" > </div>
+        <div class="col-xs-1"> </div>
+        <div class="col-xs-1"><input type="checkbox"  name="pass_<?php echo $word['id'] ?>" >  </div>
         <div class="col-xs-1"> </div>
         <div class="col-xs-1"><input type="checkbox"  name="mark_<?php echo $word['id'] ?>" > </div>
         <div class="hide_<?php echo $word['id'] ?>">
