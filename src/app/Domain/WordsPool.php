@@ -44,7 +44,7 @@ class WordsPool {
         $history=new History();
         $day=$history->total($openid,$dict);
         if($words){
-            $view->render('view/words.php', array('words' => $words, 'days' => $day));
+            $view->render('view/words.php', array('words' => $words, 'days' => $day+1));
         }else{
             $view->render('view/response.php', array('msg' => 'Oops..No new words today , please check your schedule.','location'=>1,'openid'=>$openid));
         }
