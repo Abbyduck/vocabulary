@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use PhalApi\Exception;
+use PhalApi\Logger;
 use PhalApi\Model\NotORMModel as NotORM;
 use App\Model\Words;
 
@@ -63,7 +64,7 @@ class WordsPool extends NotORM
             $history = new History();
             $history = $history->history($openid,$dict,$today);
             //no history today by now || already learnt at morning , but none at afternoon
-            if(!$history || ($history==1 && $time >= '13:05')){
+            if(!$history || ($history['a']==1 && $time >= '13:05')){
                 //select 10 new words
                 $sql = 'SELECT pool.id,w.content,w.pronunciation,w.audio,w.cndf,w.endf,w.example  '
                     . 'FROM words_pool AS pool LEFT JOIN words AS w '
