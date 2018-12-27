@@ -16,16 +16,14 @@ class WeChat extends Api {
     protected $app;
 
 	public function __construct() {
-
         $this->app = Factory::officialAccount(\PhalApi\DI()->config->get('wx_officialAccount'));
 	}
     /**
      * 微信接入地址
      */
-    public function response_echostr()
-    {
+    public function response_echostr(){
         // 验证echostr字符串
-        if (isset($_GET['echostr']) && $_GET['echostr']) {
+        if (isset($_GET['echostr']) && $_GET['echostr']){
             $this->app->server->serve()->send();
             die;
         }

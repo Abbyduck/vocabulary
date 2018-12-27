@@ -34,25 +34,25 @@
         </div>
         <?php foreach(@$words as $word){ ?>
 
-            <div class="row">
-                <div>
-                    <div class="col-xs-3 <?php if($word['pass']){echo 'pass';}elseif($word['forget']){echo 'forget';} ?>" id="word_<?php echo $word['id'] ?>" > <?php if($word['mark']){echo '*';} ?> <?php echo  "<strong>".$word['content']."</strong> </br> [".$word['pronunciation']."]" ?></div>
-                    <div class="col-xs-1"><div class=" audio" data-audio="<?php echo $word['audio'] ?>"></div></div>
-                    <div class="col-xs-1"> </div>
-                </div>
-                <input name="id_<?php echo $word['id'] ?>" value="<?php echo $word['id'] ?>" hidden>
-                <div class="col-xs-1"><input type="checkbox"  name="forget_<?php echo $word['id'] ?>" > </div>
-                <div class="col-xs-1"> </div>
-                <div class="col-xs-1"><input type="checkbox"  name="pass_<?php echo $word['id'] ?>" <?php if($word['pass']){echo 'checked';} ?>>  </div>
-                <div class="col-xs-1"> </div>
-                <div class="col-xs-1"><input type="checkbox"  name="<?php if($word['mark']){echo 'no';} ?>mark_<?php echo $word['id'] ?>" <?php if($word['mark']){echo 'checked';} ?>> </div>
-                <div class="hide_<?php echo $word['id'] ?>">
-                    <div class="col-xs-12"> <hr></div>
-                    <div class="col-xs-12" > <?php echo  $word['cndf'] ?></div>
-                    <div class="col-xs-12">-Definition: <?php echo  $word['endf'] ?></div>
-                    <div class="col-xs-12">-Example:</br><?php echo  $word['example'] ?></div>
-                </div>
+        <div class="row">
+            <div>
+                <div class="col-xs-3 <?php if($word['pass']){echo 'pass';}elseif($word['forget']){echo 'forget';} ?>" id="word_<?php echo $word['id'] ?>" > <?php if($word['mark']){echo '*';} ?> <?php echo  "<strong>".$word['content']."</strong> </br> [".$word['pronunciation']."]" ?></div>
+                <div class="col-xs-1"><div class=" audio" data-audio="<?php echo $word['audio'] ?>"></div></div>
+                <div class="col-xs-1"></div>
             </div>
+            <input name="id_<?php echo $word['id'] ?>" value="<?php echo $word['id'] ?>" hidden>
+            <div class="col-xs-1"><input type="checkbox"  name="forget_<?php echo $word['id'] ?>" ></div>
+            <div class="col-xs-1"> </div>
+            <div class="col-xs-1"><input type="checkbox"  name="pass_<?php echo $word['id'] ?>" <?php if($word['pass']){echo 'checked';} ?>>  </div>
+            <div class="col-xs-1"> </div>
+            <div class="col-xs-1"><input type="checkbox"  name="<?php if($word['mark']){echo 'no';} ?>mark_<?php echo $word['id'] ?>" <?php if($word['mark']){echo 'checked';} ?>> </div>
+            <div class="hide_<?php echo $word['id'] ?>">
+                <div class="col-xs-12"><hr></div>
+                <div class="col-xs-12" > <?php echo  $word['cndf'] ?></div>
+                <div class="col-xs-12">-Definition: <?php echo  $word['endf'] ?></div>
+                <div class="col-xs-12">-Example:</br><?php echo  $word['example'] ?></div>
+            </div>
+        </div>
 
         <?php }?>
 

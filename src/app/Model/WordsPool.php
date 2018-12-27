@@ -94,11 +94,7 @@ class WordsPool extends NotORM
             if($data){
                 $today=date('Y-m-d');
                 $this->TransactionBegin();
-                if(isset($data['pass'])){
-                    $ids=$data['pass'];
-                    $review_date=date("Y-m-d",strtotime("+1 month",strtotime($today)));
-                    $this->getORM()->where('id',$ids)->update(array('pass'=>1,'update_date'=>$today,'review_date'=>$review_date));
-                }
+
                 if(isset($data['mark'])){
                     $ids=$data['mark'];
                     $this->getORM()->where('id',$ids)->update(array('mark'=>1,'update_date'=>$today));
@@ -120,6 +116,11 @@ class WordsPool extends NotORM
                     $history= new History();
                     $history->insert($history_data);
 
+                }
+                if(isset($data['pass'])){
+                    $ids=$data['pass'];
+                    $review_date=date("Y-m-d",strtotime("+1 month",strtotime($today)));
+                    $this->getORM()->where('id',$ids)->update(array('pass'=>1,'update_date'=>$today,'review_date'=>$review_date));
                 }
                 $this->TransactionCommit();
                 return true;
@@ -158,27 +159,32 @@ class WordsPool extends NotORM
         try{
             $today = date('Y-m-d');
             $this->TransactionBegin();
-            if(isset($data['forget'])){
-                $ids=$data['forget'];
-                $this->getORM()->where('id',$ids)->where('review_date<=:today and openid=:openid ',array(':today'=>$today,':openid'=>$openid))->update(array('forget'=>new \NotORM_Literal("forget + 1"),'update_date'=>$today));
-            }
+
             if(isset($data['mark'])){
                 $ids=$data['mark'];
                 $this->getORM()->where('id',$ids)->where('review_date<=:today and openid=:openid ',array(':today'=>$today,':openid'=>$openid))->update(array('mark'=>1,'update_date'=>$today));
             }
+
+            $update_sql='UPDATE words_pool set update_date=:today ,review_date= '
+                        .' CASE WHEN ( review = 0 or review = 1 or review = 2 ) THEN date_add(:today,interval review+1 day) '
+                        .' WHEN review=3 then date_add(review_date,interval 8 day) '
+                        .' WHEN review=4 then date_add(review_date,interval 15 day) '
+                        .' ELSE date_add(review_date,interval 30 day) '
+                        .' END ,review = review+1 '
+                        .' WHERE id in ('.$review_ids.') and  review_date<=:today and openid=:openid ';
+            $this->getORM()->queryAll($update_sql, array(':ids'=>$review_ids,':today'=>$today,':openid'=>$openid));
+            //forget word review tmr
+            if(isset($data['forget'])){
+                $ids=$data['forget'];
+                $review_date=date("Y-m-d",strtotime("+1 day",strtotime($today)));
+                $this->getORM()->where('id',$ids)->where('review_date<=:today and openid=:openid ',array(':today'=>$today,':openid'=>$openid))->update(array('forget'=>new \NotORM_Literal("forget + 1"),'review_date'=>$review_date));
+            }
+            //forget word review a month later
             if(isset($data['pass'])){
                 $ids=$data['pass'];
                 $review_date=date("Y-m-d",strtotime("+1 month",strtotime($today)));
-                $this->getORM()->where('id',$ids)->where('review_date<=:today and openid=:openid ',array(':today'=>$today,':openid'=>$openid))->update(array('mark'=>1,'update_date'=>$today,'review_date'=>$review_date));
+                $this->getORM()->where('id',$ids)->where('review_date<=:today and openid=:openid ',array(':today'=>$today,':openid'=>$openid))->update(array('pass'=>1,'review_date'=>$review_date));
             }
-            $update_sql='UPDATE words_pool set update_date=:today ,review_date= '
-                .' CASE WHEN ( review = 0 or review = 1 or review = 2 ) THEN date_add(:today,interval review+1 day) '
-                .' WHEN review=3 then date_add(review_date,interval 8 day) '
-                .' WHEN review=4 then date_add(review_date,interval 15 day) '
-                .' ELSE date_add(review_date,interval 30 day) '
-                .' END ,review = review+1 '
-                .' WHERE id in ('.$review_ids.') and  review_date<=:today and openid=:openid ';
-            $this->getORM()->queryAll($update_sql, array(':ids'=>$review_ids,':today'=>$today,':openid'=>$openid));
             $this->TransactionCommit();
             return true;
         }catch(Exception $e){
@@ -194,7 +200,7 @@ class WordsPool extends NotORM
         $today=date('Y-m-d');
         $total=$this->getORM()
             ->select('id')
-            ->where('openid = :openid and status = 1 and (dict = :dict or dict = 0)  and pass = 0 and (review_date <=:today or update_date=:today)',array(':openid'=>$openid,':dict'=>$dict,':today'=>$today))
+            ->where('openid = :openid and status = 1 and (dict = :dict or dict = 0)  and (review_date <=:today or update_date=:today)',array(':openid'=>$openid,':dict'=>$dict,':today'=>$today))
             ->count('id');
         return $total;
     }

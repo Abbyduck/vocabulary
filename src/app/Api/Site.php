@@ -64,4 +64,8 @@ class Site extends Api {
         $words=new WordsPool();
         $words->getReviewWords('11',null,'chat');
     }
+    public function getNewWords(){
+        $words=new WordsPool();
+        $words->getWordsByDate('11');
+    }
 }

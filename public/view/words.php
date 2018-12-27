@@ -16,7 +16,7 @@
 <style>
     .row{ border-bottom: thin dotted; margin-bottom: 10px}
     div[class^="hide_"]{ display: none}
-    .audio{ background:url("images/audio.png") no-repeat ;background-size: 100% 100%;-moz-background-size:100% 100%;height: 14px;width: 14px}
+    .audio{ background:url("images/audio.png") no-repeat ;background-size: 100% 100%;-moz-background-size:100% 100%;height: 16px;width: 16px}
 
 </style>
 <body>
@@ -24,27 +24,27 @@
 <div class="container">
 <form action="?s=WordsPool.checkin" method="post">
     <div class="row">
-        <div class="col-xs-10"></div>
+        <div class="col-xs-9"></div>
         <div class="col-xs-1">pass </div>
         <div class="col-xs-1">mark </div>
     </div>
     <?php foreach(@$words as $word){ ?>
 
     <div class="row">
-        <div >
-            <div class="col-xs-3"> <?php echo  "<strong>".$word['content']."</strong> </br> [".$word['pronunciation']."]" ?></div>
-            <div class="col-xs-1"  ><div class=" audio" data-audio="<?php echo $word['audio'] ?>"></div></div>
-            <div class="col-xs-6"  id="word_<?php echo $word['id'] ?>"> <?php echo  $word['cndf'] ?></div>
+            <div >
+                <div class="col-xs-2"><?php echo  "<strong>".$word['content']."</strong> </br> [".$word['pronunciation']."]" ?></div>
+                <div class="col-xs-1"  ><div class=" audio" data-audio="<?php echo $word['audio'] ?>"></div></div>
+                <div class="col-xs-6"  id="word_<?php echo $word['id'] ?>"> <?php echo  $word['cndf'] ?></div>
+            </div>
+            <input name="id_<?php echo $word['id'] ?>" value="<?php echo $word['id'] ?>" hidden>
+            <div class="col-xs-1"><input type="checkbox"  name="pass_<?php echo $word['id'] ?>" > </div>
+            <div class="col-xs-1"><input type="checkbox"  name="mark_<?php echo $word['id'] ?>" > </div>
+            <div class="hide_<?php echo $word['id'] ?>">
+                <div class="col-xs-12"> <hr></div>
+                <div class="col-xs-12">-Definition: <?php echo  $word['endf'] ?></div>
+                <div class="col-xs-12">-Example:</br><?php echo  $word['example'] ?></div>
+            </div>
         </div>
-        <input name="id_<?php echo $word['id'] ?>" value="<?php echo $word['id'] ?>" hidden>
-        <div class="col-xs-1"><input type="checkbox"  name="pass_<?php echo $word['id'] ?>" > </div>
-        <div class="col-xs-1"><input type="checkbox"  name="mark_<?php echo $word['id'] ?>" > </div>
-        <div class="hide_<?php echo $word['id'] ?>">
-            <div class="col-xs-12"> <hr></div>
-            <div class="col-xs-12">-Definition: <?php echo  $word['endf'] ?></div>
-            <div class="col-xs-12">-Example:</br><?php echo  $word['example'] ?></div>
-        </div>
-    </div>
 
     <?php }?>
     <input type="submit" value="Submit">
@@ -53,6 +53,13 @@
 
 </body>
 <script>
+    $(function(){
+        $(window).scroll(function (){
+
+        });
+
+
+    });
     $("[id^='word_']").click(function(){
         var c='hide_'+ this.id.substr(5);
         var hide_class = $("."+c);
