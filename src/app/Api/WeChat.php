@@ -152,6 +152,11 @@ class WeChat extends Api {
                     "name" => "More",
                     "sub_button"=>[
                         [
+                            "type" => "view",
+                            "name" => "Review view",
+                            "url"  => "http://vocabulary.duckduck.online/?s=WordsPool.getReviewWords"
+                        ],
+                        [
                             "type" => "click",
                             "name" => "Simple Review",
                             "key"  => "V001"
@@ -173,11 +178,7 @@ class WeChat extends Api {
                     "name" => "Review",
                     "key"  => "V004"
                 ],
-                [
-                    "type" => "view",
-                    "name" => "Review2",
-                    "url"  => "http://vocabulary.duckduck.online/?s=WordsPool.getReviewWords"
-                ],
+
              ];
         return $this->app->menu->create($menus);
     }
