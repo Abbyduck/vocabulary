@@ -27,8 +27,6 @@ class WeChat extends Api {
             $this->app->server->serve()->send();
             die;
         }
-        \PhalApi\DI()->cookie=new Cookie();
-        \PhalApi\DI()->cookie->set('open_name', $this->openid, $_SERVER['REQUEST_TIME'] + 60*30);
         $this->app->server->push(function ($message) {
             $user_openid = $message['FromUserName'];
             $user_info['openid'] = $user_openid;
@@ -67,10 +65,6 @@ class WeChat extends Api {
                                     break;
 
                                 case 'V004'://temp view words
-                                    return 'http://vocabulary.duckduck.online/?s=WordsPool.getReviewWords&openid='.$user_openid;
-                                    break;
-                                case 'V005'://temp view words
-
                                     return 'http://vocabulary.duckduck.online/?s=WordsPool.getReviewWords&openid='.$user_openid;
                                     break;
 
