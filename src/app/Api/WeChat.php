@@ -175,7 +175,7 @@ class WeChat extends Api {
                 ],
                 [
                     "type" => "view",
-                    "name" => "Review view",
+                    "name" => "Review2",
                     "url"  => "http://vocabulary.duckduck.online/?s=WordsPool.getReviewWords"
                 ],
              ];
