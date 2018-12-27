@@ -106,7 +106,6 @@ class WordsPool extends NotORM
 
                     $update_arr=array('status'=>1,'study_date'=>$today,'review_date'=>$today,'update_date'=>$today);
                     $this->getORM()
-                        ->where("pass!=1")
                         ->where("id",$ids)
                         ->update($update_arr);
 
