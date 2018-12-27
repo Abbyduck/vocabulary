@@ -32,7 +32,8 @@ class WordsPool extends Api {
                 'method'=>array('name' => 'REQUEST_METHOD', 'source' => 'server'),
             ),
             'getReviewWords' => array(
-                'openid'=>array('name' => 'openid',  'require' => true, 'desc' => 'openid'),
+//                'openid'=>array('name' => 'openid',  'require' => true, 'desc' => 'openid'),
+                'openid'=>array('name' => 'openid', 'source' => 'cookie','require' => true,'desc'=>'openid in cookie'),
                 'page' => array('name' => 'page', 'type' => 'int', 'min' => 1, 'default' => 1, 'desc' => 'page'),
                 'view' => array('name' => 'view', 'default' => 'view', 'desc' => 'return view / words'),
                 'method'=>array('name' => 'REQUEST_METHOD', 'source' => 'server'),
@@ -124,8 +125,8 @@ class WordsPool extends Api {
             $wordsPool= new DomainWordsPool();
             $wordsPool->review($this->openid, $data);
         }
-        \PhalApi\DI()->cookie=new Cookie();
-        \PhalApi\DI()->cookie->set('open_name', $this->openid, $_SERVER['REQUEST_TIME'] + 60*30);
+//        \PhalApi\DI()->cookie=new Cookie();
+//        \PhalApi\DI()->cookie->set('open_name', $this->openid, $_SERVER['REQUEST_TIME'] + 60*30);
         $wordsPool= new DomainWordsPool();
         $words= $wordsPool->getReviewWords($this->openid,$this->page,$this->view);
         if($this->view=='chat'){
