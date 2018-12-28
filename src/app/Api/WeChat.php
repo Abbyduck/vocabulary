@@ -146,11 +146,6 @@ class WeChat extends Api {
                     "name" => "More",
                     "sub_button"=>[
                         [
-                            "type" => "view",
-                            "name" => "Review view",
-                            "url"  => "http://vocabulary.duckduck.online/?s=WordsPool.getReviewWords"
-                        ],
-                        [
                             "type" => "click",
                             "name" => "Simple Review",
                             "key"  => "V001"
