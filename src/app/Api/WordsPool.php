@@ -5,6 +5,7 @@ use PhalApi\Api;
 use PhalApi\Cookie;
 use PhalApi\Exception;
 use App\Domain\WordsPool as DomainWordsPool;
+use App\Common\Common;
 
 /**
  * Words Pool
@@ -80,9 +81,14 @@ class WordsPool extends Api {
     public function checkin(){
         if($this->method == 'POST'){
             $data=array();
+            $common=new Common();
             foreach($_POST as $k=> $v){
                 if(substr($k,0,2)=='id'){
                     $data["id"][]=$v;
+                }elseif(substr($k,0,6)=='remark'){
+                    $id=substr($k,7);
+                    $field=substr($k,0,6);
+                    $data["$field"][$id]= $common->test_input($v);
                 }else{
                     $id=substr($k,5);
                     $field=substr($k,0,4);

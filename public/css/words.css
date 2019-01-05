@@ -1,0 +1,185 @@
+
+.row{ border-bottom: thin dotted; margin-bottom: 10px}
+div[class^="hide_"]{ display: none}
+.audio{ background:url("../images/audio.png") no-repeat ;background-size: 100% 100%;-moz-background-size:100% 100%;height: 16px;width: 16px}
+.content {font-size: large }
+.swiper {
+    width: 100%;
+    position: relative;
+    margin: 30px 0 0 0;
+    height: 600px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: black ;
+    border:3px solid black;
+    /*box-shadow: 0px 0px 5px #000;*/
+    /*text-align: center;*/
+
+}
+.swiper-container {
+    width: 100%;
+    height:580px;
+    color: #fff;
+    background: #5e5e5e;
+    /*text-align: center;*/
+}
+.swiper-slide {
+    overflow-y: scroll;
+    padding: 5px 10px;
+    /*background: #444444;*/
+    background: #fff;
+    color:black;
+    width:auto;
+    height:300px;
+    opacity: 0.4;
+    -webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    -ms-transition: 300ms;
+    -o-transition: 300ms;
+    transition: 300ms;
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+}
+.pagination {
+    position: absolute;
+    z-index: 20;
+    left: 0px;
+    width: 100%;
+    /*text-align: center;*/
+    bottom: 5px;
+}
+.slide10 {
+    background: white;
+    font-size: large;
+    color:black;
+    width:100%;
+    line-height: 30px;
+}
+.slide0 {
+    background: #ca4040;
+}
+.slide1 {
+    background: #4390ee;
+}
+.slide2 {
+    background: #ff8604;
+}
+.slide3 {
+    background: #49a430;
+}
+.slide4 {
+    background: #973e76;
+}
+.swiper-slide-visible {
+    opacity: 0.5;
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -o-transform: scale(0.8);
+    transform: scale(0.8);
+}
+.swiper-slide-active {
+    top: 0;
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+}
+.swiper-slide .title {
+    font-style: italic;
+    font-size: 42px;
+    margin-top: 80px;
+    margin-bottom: 0;
+    line-height: 45px;
+}
+.swiper-pagination-switch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 8px;
+    background: #aaa;
+    margin-right: 8px;
+    cursor: pointer;
+    -webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    -ms-transition: 300ms;
+    -o-transition: 300ms;
+    transition: 300ms;
+    opacity: 0;
+    position: relative;
+    top: -50px;
+}
+.swiper-visible-switch {
+    opacity: 1;
+    top: 0;
+    background: #aaa;
+}
+.swiper-active-switch {
+    background: #fff;
+}
+body{
+    padding: 10px !important;
+}
+/*
+All/Swipe mode switch
+*/
+.box1{background: #629FCE;width: 100px;height: 20px;border-radius: 15px;right: 10%;top: 5px;}
+.sliderr{background: #F6F6F6;width: 51px;height: 20px;border-radius: 15px;position: absolute;left:65px}
+.box1 span{height: 20px;line-height: 20px;color: #F6F6F6;font-weight: 400; }
+.m{float: left;margin-left: 20px}
+.w{float: right;margin-right: 10px}
+/*All/Swipe mode switch-------------------------------------------------------------------------------*/
+
+.line div{display: inline}
+.center{height: 100%;line-height:240px;margin: 0 auto;text-align: center}
+
+
+.mark_btn {
+    position: absolute;
+    top:5px;
+    right:10px;
+    /*background: black;*/
+}
+
+.mark_btn input[type="checkbox"]{
+    opacity: 0;
+}
+.mark_btn label{
+    color:white;
+    background: black ;
+    border:black;
+    border-radius: 5px;
+    padding: 0 5px;
+}
+.mark_btn input[type="checkbox"]  + label:before{
+    content:"Mark";
+    color:white;
+}
+.mark_btn input[type="checkbox"]:checked+ label:before{
+    content:"Marked";
+    color: #adadad;
+}
+
+.pass_btn input[type="checkbox"]{
+    opacity: 0;
+}
+.pass_btn label{
+    color:white;
+    background: green ;
+    border:green;
+    border-radius: 5px;
+    padding: 0 5px;
+}
+.pass_btn input[type="checkbox"]  + label:before{
+    content:"Pass";
+    color:white;
+}
+.pass_btn input[type="checkbox"]:checked+ label:before{
+    content:"Passed";
+    color: #adadad;
+}
