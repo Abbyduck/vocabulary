@@ -53,7 +53,7 @@ class WeChat extends Api {
                             switch ($message['EventKey']) {
                                 case 'V001'://simple review words
                                     $words=new WordsPool();
-                                    return $words->getReviewWords($user_openid,null,'chat');
+                                    return $words->simpleReview($user_openid);
                                     break;
 
                                 case 'V002'://forget words

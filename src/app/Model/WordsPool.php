@@ -123,7 +123,9 @@ class WordsPool extends NotORM
                 }
                 if(isset($data['remark'])){
                     foreach($data['remark'] as $k=>$v){
-                        $this->getORM()->where('id',$k)->update(array('remark'=>$v));
+                        if($v){
+                            $this->getORM()->where('id',$k)->update(array('remark'=>$v));
+                        }
                     }
                 }
                 $this->TransactionCommit();
@@ -144,7 +146,7 @@ class WordsPool extends NotORM
         $today = date('Y-m-d');
         $limit=($page-1)*$perpage;
 
-        $sql = 'SELECT pool.id,w.content,w.pronunciation,w.audio,w.cndf,w.endf,w.example,pool.forget ,pool.review,pool.pass,pool.mark  '
+        $sql = 'SELECT pool.id,w.content,w.pronunciation,w.audio,w.cndf,w.endf,w.example,pool.forget ,pool.review,pool.pass,pool.mark,pool.remark  '
             . 'FROM words_pool AS pool LEFT JOIN words AS w '
             . 'ON pool.word_id = w.id '
             . 'WHERE pool.openid = :openid and pool.status = 1 and (pool.dict = :dict or pool.dict = 0) and (review_date <=:today or update_date=:today) '
@@ -154,6 +156,19 @@ class WordsPool extends NotORM
         }
         $words = $this->getORM()->queryAll($sql, array(':openid'=>$openid,':dict'=>$dict,':today'=>$today));
 
+        return $words;
+    }
+    public function simpleReview($openid){
+        $schedule = new Schedule();
+        $dict = $schedule->getDict($openid);
+        $today = date('Y-m-d');
+
+        $sql = 'SELECT w.content '
+            . 'FROM words_pool AS pool LEFT JOIN words AS w '
+            . 'ON pool.word_id = w.id '
+            . 'WHERE pool.openid = :openid and pool.status = 1 and (pool.dict = :dict or pool.dict = 0) and study_date =:today  '
+            ;
+        $words = $this->getORM()->queryAll($sql, array(':openid'=>$openid,':dict'=>$dict,':today'=>$today));
         return $words;
     }
 

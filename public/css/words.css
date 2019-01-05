@@ -2,6 +2,10 @@
 .row{ border-bottom: thin dotted; margin-bottom: 10px}
 div[class^="hide_"]{ display: none}
 .audio{ background:url("../images/audio.png") no-repeat ;background-size: 100% 100%;-moz-background-size:100% 100%;height: 16px;width: 16px}
+.forget{color:orange;}
+.pass{color:green;}
+.review_remark {border-radius: 8px ; border:1px solid black;margin-bottom: 4px;}
+.review_example{border-radius: 8px ; border:1px solid black;margin-bottom: 4px;}
 .content {font-size: large }
 .swiper {
     width: 100%;

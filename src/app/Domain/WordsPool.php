@@ -64,6 +64,7 @@ class WordsPool {
     public function getReviewWords($openid,$page,$view=null){
         $wordsPool= new ModelWordsPool();
         $words=$wordsPool->getReviewWords($openid,$page,$view);
+        //TODO del
         if($view=='chat'){
             $chat='';
             foreach($words as $v){
@@ -84,9 +85,19 @@ class WordsPool {
             }
         }
     }
+    public function simpleReview($openid){
+        $wordsPool= new ModelWordsPool();
+        $words=$wordsPool->simpleReview($openid);
+        $chat='';
+        foreach($words as $v){
+            $chat.=$v['content']."\n";
+        }
+        return $chat;
+    }
 
     public function review($openid, $data){
         $wordsPool = new ModelWordsPool();
         $wordsPool->review($openid,$data);
+
     }
 }

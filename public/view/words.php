@@ -2,7 +2,6 @@
 <html>
 <header>
 
-
 </header>
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,6 +13,7 @@
 
 <script  src="js/bootstrap.min.js"></script>
 <script  src="js/idangerous.swiper.min.js"></script>
+<script  src="js/words.js"></script>
 
 
 
@@ -39,8 +39,8 @@
 
         <div class="row">
             <div >
-                <div class="col-xs-2" data-toggle="modal" data-target="#myModal" data-endf='<?php echo $word['endf'] ?>'  data-ex="<?php echo $word['example'] ?>" ><?php echo  "<strong>".$word['content']."</strong> </br> [".$word['pronunciation']."]" ?></div>
-                <div class="col-xs-1"  ><div class="pronounce audio" data-audio="<?php echo $word['audio'] ?>"></div></div>
+                <div class="col-xs-3 pronounce" data-audio="<?php echo $word['audio'] ?>" data-toggle="modal" data-target="#myModal" data-endf='<?php echo $word['endf'] ?>'  data-ex="<?php echo $word['example'] ?>" ><?php echo  "<strong>".$word['content']."</strong> </br> [".$word['pronunciation']."]" ?></div>
+
                 <div class="col-xs-6"  id="word_<?php echo $word['id'] ?>"> <?php echo  $word['cndf'] ?></div>
             </div>
             <input name="id_<?php echo $word['id'] ?>" value="<?php echo $word['id'] ?>" hidden>
@@ -169,11 +169,7 @@
 
         });
     });
-    $(".pronounce").click(function(){
-        var audio = new Audio();
-        audio.src=this.dataset.audio;
-        audio.play();
-    });
+
 
 //    $(".remark button").click(function(){
 //        var n=this.id;
