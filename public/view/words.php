@@ -56,21 +56,7 @@
     <form action="?s=WordsPool.checkin" method="post" id="swipe_form">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide slide10">
-                    <?php foreach(@$words as $k=> $word){ ?>
-                        <div class="col-xs-2"></div>
-                        <div class="col-xs-5">
-                            <span><?php echo  "<strong>".$word['content']."</strong> " ?></span>
-                        </div>
-                        <div class="pass_btn">
-                            <input  type="checkbox" id="pass_<?php echo $word['id'] ?>"  name="pass_<?php echo $word['id'] ?>"  />
-                            <label class="label-btn" for="pass_<?php echo $word['id'] ?>"></label>
-                        </div>
-                    <?php }?>
-                    <br>
-                    <div class="col-xs-4"></div>
-                    <button type="submit" class="btn btn-primary ">Submit</button>
-                </div>
+
                 <?php foreach(@$words as $k=> $word){ ?>
 
                     <div class="swiper-slide slide<?php echo $k%5?> pronounce"  data-audio="<?php echo $word['audio'] ?>">
@@ -86,12 +72,27 @@
                         <div class="endf"> <?php echo  $word['endf'] ?></div>
                         <div><strong>Example:</strong></div>
                         <div class="example"> <?php echo  $word['example'] ?></div>
-                        <div class="remark" ><strong><button class="btn btn-primary btn-xs" id="remark_<?php echo $word['id'] ?>">Remark</button></strong></div>
+                        <div class="remark" ><strong>Remark:</strong></div>
+                        <textarea  aria-label="Remark" name="remark_<?php echo $word['id'] ?>" style="width:100%;" for="swipe_form"></textarea>
                         <input name="id_<?php echo $word['id'] ?>" value="<?php echo $word['id'] ?>" hidden>
                         <br>
                     </div>
                 <?php }?>
-
+                <div class="swiper-slide slide10">
+                    <?php foreach(@$words as $k=> $word){ ?>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-5">
+                            <span><?php echo  "<strong>".$word['content']."</strong> " ?></span>
+                        </div>
+                        <div class="pass_btn">
+                            <input  type="checkbox" id="pass_<?php echo $word['id'] ?>"  name="pass_<?php echo $word['id'] ?>"  />
+                            <label class="label-btn" for="pass_<?php echo $word['id'] ?>"></label>
+                        </div>
+                    <?php }?>
+                    <br>
+                    <div class="col-xs-4"></div>
+                    <button type="submit" class="btn btn-primary ">Submit</button>
+                </div>
             </div>
         </div>
     </form>
@@ -127,26 +128,20 @@
 
 </script>
 <script>
+    $(".swiper").height(window.innerHeight-120);
+    $(".swiper-container").height(window.innerHeight-120);
 
-    var mySwiper = undefined; new Swiper('.swiper-container',{
+    var mySwiper= new Swiper('.swiper-container',{
 //        pagination: '.pagination',
 //        paginationClickable: true,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        watchActiveIndex: true,
-        resizeReInit : true,
-//        mousewheelControl:true,
-        mode:"vertical"
-
-    });
-
-
-
-    $("#id").click(function(){
-        $("#slide-box").css({
-            'left':'300px'
+            centeredSlides: true,
+            slidesPerView: 'auto',
+//        watchActiveIndex: true,
+            resizeReInit : true,
+            mousewheelControl:true,
+            mode:"vertical",
+            freeModeFluid:true,
         });
-    });
     //    $("[id^='word_']").click(function(){
     //        var c='hide_'+ this.id.substr(5);
     //        var hide_class = $("."+c);
@@ -161,7 +156,7 @@
         var top=$(this).offset().clientTop+$(this).height();
         console.log(this);
         $('#df').css({
-            'margin-top': top,
+            'margin-top': top
         });
         $('#myModal').on('show.bs.modal', function (event){
             var button = $(event.relatedTarget);
@@ -180,12 +175,12 @@
         audio.play();
     });
 
-    $(".remark button").click(function(){
-        var n=this.id;
-        var remark='<textarea  aria-label="Remark" name="'+n+'" style="width:100%;" for="swipe_form"></textarea>';
-        $(this).parent().parent().append(remark);
-        $(this).attr('disabled','disabled');
-    });
+//    $(".remark button").click(function(){
+//        var n=this.id;
+//        var remark='<textarea  aria-label="Remark" name="'+n+'" style="width:100%;" for="swipe_form"></textarea>';
+//        $(this).parent().parent().append(remark);
+//        $(this).attr('disabled','disabled');
+//    });
 </script>
 </body>
 
