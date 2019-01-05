@@ -89,9 +89,14 @@ class WordsPool {
         $wordsPool= new ModelWordsPool();
         $words=$wordsPool->simpleReview($openid);
         $chat='';
-        foreach($words as $v){
-            $chat.=$v['content']."\n";
+        if($words){
+            foreach($words as $v){
+                $chat.=$v['content']."\n";
+            }
+        }else{
+            $chat='No study today o~';
         }
+
         return $chat;
     }
 
