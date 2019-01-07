@@ -61,7 +61,7 @@
 
                     <div class="swiper-slide slide<?php echo $k%5?> pronounce"  data-audio="<?php echo $word['audio'] ?>">
                         <div class="line">
-                            <div class="content"><?php echo  "<strong>".$word['content']."</strong>  [".$word['pronunciation']."]" ?>&nbsp;&nbsp;&nbsp;</div>
+                            <div class="content swiper-no-swiping"><?php echo  "<strong>".$word['content']."</strong>  [".$word['pronunciation']."]" ?>&nbsp;&nbsp;&nbsp;</div>
                             <div class="pronounce audio" data-audio="<?php echo $word['audio'] ?>"> &nbsp;&nbsp;&nbsp;&nbsp;</div>
                         </div>
                         <div class="mark_btn">
@@ -71,7 +71,7 @@
                         <div class="cndf"> <?php echo  $word['cndf'] ?></div>
                         <div class="endf"> <?php echo  $word['endf'] ?></div>
                         <div><strong>Example:</strong></div>
-                        <div class="example"> <?php echo  $word['example'] ?></div>
+                        <div class="example swiper-no-swiping"> <?php echo  $word['example'] ?></div>
                         <div class="remark" ><strong>Remark:</strong></div>
                         <textarea  aria-label="Remark" name="remark_<?php echo $word['id'] ?>" style="width:100%;" for="swipe_form"></textarea>
                         <input name="id_<?php echo $word['id'] ?>" value="<?php echo $word['id'] ?>" hidden>
@@ -141,6 +141,7 @@
             mousewheelControl:true,
             mode:"vertical",
             freeModeFluid:true,
+            noSwiping:true,
         });
     //    $("[id^='word_']").click(function(){
     //        var c='hide_'+ this.id.substr(5);
