@@ -196,7 +196,7 @@ class WordsPool extends NotORM
             if(isset($data['forget'])){
                 $ids=$data['forget'];
                 $review_date=date("Y-m-d",strtotime("+1 day",strtotime($today)));
-                $this->getORM()->where('id',$ids)->where('review_date<=:today and openid=:openid ',array(':today'=>$today,':openid'=>$openid))->update(array('forget'=>new \NotORM_Literal("forget + 1"),'review_date'=>$review_date));
+                $this->getORM()->where('id',$ids)->where('openid=:openid ',array(':openid'=>$openid))->update(array('forget'=>new \NotORM_Literal("forget + 1"),'review_date'=>$review_date));
             }
             //forget word review a month later
             if(isset($data['pass'])){
