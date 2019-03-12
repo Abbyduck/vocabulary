@@ -96,7 +96,6 @@ class WordsPool {
         }else{
             $chat='No study today o~';
         }
-
         return $chat;
     }
 

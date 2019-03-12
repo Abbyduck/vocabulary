@@ -89,6 +89,15 @@ class WeChat extends Api {
                                 return 'Sorry! Something Wrong Happened.';
                             }
                             break;
+                        case 'restart':
+                            $wordsPool=new WordsPool();
+                            $start=$wordsPool->selectWordBook($user_openid,1,1);
+                            if($start){
+                                return 'Total '.$start.' words restart!';
+                            }else{
+                                return 'Sorry! Something Wrong Happened.';
+                            }
+                            break;
                         case strpos($message['Content'],"/::)",0):
                             $words = substr($message['Content'],4);
                             return $words;

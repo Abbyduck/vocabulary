@@ -204,6 +204,11 @@ class WordsPool extends NotORM
                 $review_date=date("Y-m-d",strtotime("+1 month",strtotime($today)));
                 $this->getORM()->where('id',$ids)->where('review_date<=:today and openid=:openid ',array(':today'=>$today,':openid'=>$openid))->update(array('pass'=>1,'review_date'=>$review_date));
             }
+            if(isset($data['remark'])){
+                foreach($data['remark'] as $k=>$v){
+                    if($v){ $this->getORM()->where('id',$k)->update(array('remark'=>$v));}
+                }
+            }
             $this->TransactionCommit();
             return true;
         }catch(Exception $e){

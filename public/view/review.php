@@ -44,8 +44,8 @@
             <div class="col-xs-1"><input type="checkbox"  name="<?php if($word['mark']){echo 'no';} ?>mark_<?php echo $word['id'] ?>" <?php if($word['mark']){echo 'checked';} ?>> </div>
             <div class="hide_<?php echo $word['id'] ?>">
                 <div class="col-xs-12"><hr></div>
-                <div class="col-xs-12 " > <?php echo  $word['cndf'] ?></div>
-                <div class="col-xs-12 review_remark">Remark: <?php echo  $word['remark'] ?></div>
+                <div class="col-xs-12"> <?php echo  $word['cndf'] ?></div>
+                <div class="col-xs-12 review_remark" id="remark_<?php echo  $word['id'] ?>">Remark: <?php echo  $word['remark'] ?></div>
                 <div class="col-xs-12 review_example">Example:</br><?php echo  $word['example'] ?></div>
             </div>
         </div>
@@ -66,6 +66,20 @@
             hide_class.show();
         }else{
             hide_class.hide();
+        }
+    });
+
+    var touchtime = new Date().getTime();
+    $(".review_remark").click(function(){
+        if( new Date().getTime() - touchtime < 500 ){
+            if( $(this).children().length==0){
+                var val= $(this).text().substr(7);
+                $(this).text("Remark:");
+                var input="<input name='"+this.id+"' value='"+val+"'>";
+                $(this).append(input);
+            }
+        }else{
+            touchtime = new Date().getTime();
         }
     });
     $(".audio").click(function(){

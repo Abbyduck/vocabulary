@@ -107,8 +107,10 @@ class WordsPool extends Api {
      * @return words string / view
      */
     public function getReviewWords(){
+        var_dump($_POST);
         if($this->method == 'POST'){
             $data=array();
+            $common=new Common();
             foreach($_POST as $k=> $v){
                 switch ($k){
                     case substr($k,0,2)=='id':
@@ -116,6 +118,9 @@ class WordsPool extends Api {
                         break;
                     case substr($k,0,6)=='forget':
                         $data["forget"][]=substr($k,7);
+                        break;
+                    case substr($k,0,6)=='remark':
+                        $data["remark"][substr($k,7)]=$common->test_input($v);
                         break;
                     case substr($k,0,4)=='mark':
                         $data["mark"][]=substr($k,5);
@@ -128,6 +133,8 @@ class WordsPool extends Api {
                         break;
                 }
             }
+            var_dump($data);
+
             $wordsPool= new DomainWordsPool();
             $wordsPool->review($this->openid, $data);
         }
